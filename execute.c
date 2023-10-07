@@ -10,12 +10,14 @@ int executeFile(char **command)
 	if (processID == -1)
 	{
 		perror("Error Creating process");
-		exit(EXIT_STATUS); /* return with exit failure */
+		exit(EXIT_FAILURE); /* return with exit failure */
 	}
 	else if (processID == 0)
 	{
 		printf("Inside child process\n");
 		/* call execve */
+		execve(command[0], command, environ);
+			/*calling execve with command array and global environ variable */
 	}
 	else
 	{

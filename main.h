@@ -8,10 +8,10 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-int EXIT_STATUS = 0;
+/* int EXIT_STATUS = 0; */
 extern char **environ;
 
-ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
+ssize_t _getline(char **lineptr, size_t *n, int fd);
 char **splitInput(char *string);
 int checkinbuilt(char *string);
 

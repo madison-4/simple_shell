@@ -14,7 +14,7 @@ char *mystrtok(char *str, const char *delim)
 
 	index = token;
 
-	while (*token != delim && *token != '\0')
+	while (*token != *delim && *token != '\0') /*loop through to check for delim */
 		token++;
 
 	if (*token)

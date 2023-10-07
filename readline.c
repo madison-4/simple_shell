@@ -1,16 +1,6 @@
 #include "main.h"
 
-/**
- * _getline - reads a line of input from stdin
- * displays line on the stdout
- * @lineptr: a buffer to hold the content read from standard input
- * @n: to calculate the size of the buffer
- * @stream: stream to read from
- *
- * Return: the number of characters read successfully | -1 on failure
- */
-
-ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
+ssize_t _getline(char **lineptr, size_t *n, int fd)
 {
 	int idx = 0;
 	char buffer[1024];
@@ -19,7 +9,7 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 	for (idx = 0; idx < 1024; idx++)
 		buffer[idx] = '\0';
 
-	readBytes = read(0, buffer, sizeof(buffer));
+	readBytes = read(fd, buffer, sizeof(buffer));
 	 /* ssize_t read(int fd, void *buf, size_t count); */
 
 	printf("readBytes is %ld\n", readBytes);

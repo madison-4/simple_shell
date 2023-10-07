@@ -13,7 +13,7 @@ char **splitInput(char *string)
 	if (customArray == NULL)
 	{
 		perror("Error creating customArray");
-		exit(EXIT_STATUS); /* change to EXIT_FAILURE */
+		exit(EXIT_FAILURE); /* change to EXIT_FAILURE */
 	}
 
 	splitToken = strtok(string, delim);

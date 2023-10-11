@@ -2,9 +2,16 @@
 
 int executeFile(char **command)
 {
-	int waitStatus = 0;
+	char *execPath;
+	int waitStatus = 0, executeRV = 0;
 	pid_t processID = 0;
 
+	execPath = fullpath(command[0]);
+	if (execPath == NULL)
+	{
+		fprintf(stderr, "./hsh: %s: not found\n", command[0]);
+		return (EXIT_FAILURE);
+	}
 	processID = fork();
 
 	if (processID == -1)
@@ -15,16 +22,22 @@ int executeFile(char **command)
 	else if (processID == 0)
 	{
 		printf("Inside child process\n");
+		printf("exexutable %s\n", execPath);
 		/* call execve */
-		execve(command[0], command, environ);
+		executeRV = execve(execPath, command, environ);
 			/*calling execve with command array and global environ variable */
+		if (executeRV == -1)
+		{
+			perror("Failed to execute program");
+			free(execPath);
+			return (EXIT_FAILURE);
+		}
 	}
 	else
 	{
 		printf("Inside parent process\n");
 		wait(&waitStatus);
 	}
-
+	free(execPath);
 	return (EXIT_SUCCESS);
-
 }

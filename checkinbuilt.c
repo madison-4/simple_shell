@@ -1,20 +1,24 @@
 #include "main.h"
 
-int checkinbuilt(char *string)
+int checkinbuilt(char **string)
 {
-	if (strcmp(string, "exit") == 0)
+	if (strcmp(string[0], "exit") == 0)
 	{
-		/* free(memory address) */
+		free(string[0]);
+		free(string);
 		exit(EXIT_SUCCESS);
 	}
-	else if (strcmp(string, "env") == 0)
+	else if (strcmp(string[0], "env") == 0)
 	{
 		/* printenv();*/
+		/* return (1); */
 	}
 	else
+	{
 		/* some other logic */
 
-	/* EXIT_STATUS = EXIT_SUCCESS; */
-		return (0);
-	return (0);
+		/* EXIT_STATUS = EXIT_SUCCESS; */
+		return (1);
+	}
+	return (-1);
 }

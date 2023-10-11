@@ -15,7 +15,6 @@ char **splitInput(char *string)
 		perror("Error creating customArray");
 		exit(EXIT_FAILURE); /* change to EXIT_FAILURE */
 	}
-
 	splitToken = strtok(string, delim);
 	while (splitToken != NULL)
 	{
@@ -23,7 +22,7 @@ char **splitInput(char *string)
 		idx++;
 		splitToken = strtok(NULL, delim);
 	}
-	customArray[idx] = "NULL"; /* NULL terminate at the end */
+	customArray[idx] = NULL; /* NULL terminate at the end */
 
 	return (customArray);
 }

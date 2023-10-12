@@ -21,8 +21,8 @@ int executeFile(char **command)
 	}
 	else if (processID == 0)
 	{
-		printf("Inside child process\n");
-		printf("exexutable %s\n", execPath);
+		/* printf("Inside child process\n"); */
+		/* printf("exexutable %s\n", execPath); */
 		/* call execve */
 		executeRV = execve(execPath, command, environ);
 			/*calling execve with command array and global environ variable */
@@ -35,7 +35,7 @@ int executeFile(char **command)
 	}
 	else
 	{
-		printf("Inside parent process\n");
+		/* printf("Inside parent process\n"); */
 		wait(&waitStatus);
 	}
 	free(execPath);

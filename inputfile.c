@@ -4,11 +4,16 @@ int main(void)
 {
 	char *print = "($)";
 	char *inputString = NULL;
-	size_t buffsize = 0;
+	size_t j, buffsize = 0;
 	int i = 0, Rvalue = 0;
 	int exit_status = 0;
 	char **commandOutput = NULL;
 
+	inputString = malloc(1024);
+	if (inputString == NULL)
+	{
+		perror("Error assigning memory");
+	}
 	while (1)
 	{
 		if (isatty(STDIN_FILENO) == 1)
@@ -17,13 +22,22 @@ int main(void)
 
 		if (Rvalue == -1)
 		{
+			free(inputString);
 			exit(exit_status);
 		}
+		j = 0;
+		while (inputString[j] != '\0' && j < strlen(inputString) && inputString[j] == ' ')
+		{
+			j++;
+			continue;
+		}
+		if (*(inputString + j) == '\n')
+			continue;
 		/* tokenize input to create custom Array */
-		commandOutput = splitInput(inputString);
+		commandOutput = splitInput(inputString + j);
 		/* check if command is inbuilt command */
-		printf("Command idx 0:%s\n", commandOutput[0]);
-		if (checkinbuilt(commandOutput) == 0)/*fix Return Value */
+		/* printf("Command idx 0:%s\n", commandOutput[0]); */
+		if (checkinbuilt(commandOutput, inputString) == 0)/*fix Return Value */
 		{
 			/* execute inbuilt command and return with status */
 			exit_status = 0;
@@ -33,8 +47,12 @@ int main(void)
 		/* else, pass the command to execute function */
 		for (i = 0; commandOutput[i] != NULL; i++)
 			free(commandOutput[i]);
+		free(commandOutput);
 	}
+	for (i = 0; commandOutput[i] != NULL; i++)
+		free(commandOutput[i]);
 	free(commandOutput);
-	printf("Exit Status is : %d\n", exit_status);
+	free(inputString);
+	/* printf("Exit Status is : %d\n", exit_status); */
 	return (0);
 }

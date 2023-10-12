@@ -18,7 +18,7 @@ char **splitInput(char *string)
 	splitToken = strtok(string, delim);
 	while (splitToken != NULL)
 	{
-		customArray[idx] = splitToken;
+		customArray[idx] = strdup(splitToken);
 		idx++;
 		splitToken = strtok(NULL, delim);
 	}

@@ -4,7 +4,7 @@ int main(void)
 {
 	char *print = "($)";
 	char *inputString = NULL;
-	size_t buffsize = 0;
+	size_t j, buffsize = 0;
 	int i = 0, Rvalue = 0;
 	int exit_status = 0;
 	char **commandOutput = NULL;
@@ -25,8 +25,16 @@ int main(void)
 			free(inputString);
 			exit(exit_status);
 		}
+		j = 0;
+		while (inputString[j] != '\0' && j < strlen(inputString) && inputString[j] == ' ')
+		{
+			j++;
+			continue;
+		}
+		if (*(inputString + j) == '\n')
+			continue;
 		/* tokenize input to create custom Array */
-		commandOutput = splitInput(inputString);
+		commandOutput = splitInput(inputString + j);
 		/* check if command is inbuilt command */
 		/* printf("Command idx 0:%s\n", commandOutput[0]); */
 		if (checkinbuilt(commandOutput, inputString) == 0)/*fix Return Value */

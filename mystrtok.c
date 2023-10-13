@@ -31,7 +31,7 @@ char *_strpbrk(char *s, char *accept)
 char *_strtok(char *str, const char *delim)
 {
 	static char *token;
-	char *token;
+	char *start;
 
 	if (str != NULL)
 		token = str;
@@ -41,7 +41,7 @@ char *_strtok(char *str, const char *delim)
 			return NULL;
 	}
 
-	*start = token;
+	start = token;
 	token = strpbrk(start, delim);
 
 	if (token != NULL)

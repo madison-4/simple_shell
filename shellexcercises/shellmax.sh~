@@ -1,3 +1,0 @@
-#!/bin/bash
-max_pid=$(getconf PidMax)
-echo "The maximum process ID is: $max_pid"

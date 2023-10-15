@@ -10,22 +10,10 @@
  */
 int main(void)
 {
-	char *buffer;
 	size_t bufsize = 50, i = 0;
 	size_t chars;
 
-	while (1)
-	{
-		i = 0;
-		printf("$ ");
-		chars = getline(&buffer, &bufsize, STDIN_FILENO);
-	     	while (buffer[i] && (i < chars))
-		{
-			putchar(buffer[i]);
-			i++;
-		}
-		if (buffer[i] == 0)
-			break;
-	}
+	chars = (bufsize / i);
+	printf("%lu", chars);
 	return (0);
 }

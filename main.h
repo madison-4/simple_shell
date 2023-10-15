@@ -21,5 +21,6 @@ int executeFile(char **command);
 void printenv(void);
 char *_strpbrk(char *s, char *accept);
 char *_strtok(char *str, const char *delim);
+int _strlen(char *str);
 
 #endif /*MAIN_H*/

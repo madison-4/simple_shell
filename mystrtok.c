@@ -51,3 +51,17 @@ char *_strtok(char *str, const char *delim)
 	}
 	return (start);
 }
+/**
+ * _strlen - get the length of a string
+ * clone strlen
+ * @str: string to find length of
+ * Return: length of string
+ */
+size_t _strlen(char *str)
+{
+	size_t len = 0;
+
+	while(str[len])
+		len++;
+	return (0);
+}

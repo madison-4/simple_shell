@@ -6,7 +6,7 @@ ssize_t _getline(char **lineptr, size_t *n, int fd)
 	/* char buffer[1024]; */
 	ssize_t readBytes = 0;
 
-	readBytes = read(fd, (*lineptr), sizeof(*lineptr));
+	readBytes = read(fd, (lineptr), sizeof(lineptr));
 	 /* ssize_t read(int fd, void *buf, size_t count); */
 
 	printf("readBytes is %ld\n", readBytes);
@@ -16,8 +16,8 @@ ssize_t _getline(char **lineptr, size_t *n, int fd)
 		/*free(buffer);*/
 		return (-1);
 	}
-	(*lineptr)[readBytes] = '\0';
-	write(STDOUT_FILENO, (*lineptr), readBytes);
+	(lineptr)[readBytes] = '\0';
+	write(STDOUT_FILENO, (lineptr), readBytes);
 
 	*n = readBytes;
 

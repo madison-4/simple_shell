@@ -8,8 +8,8 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
+#include <signal.h>
 
-/* int EXIT_STATUS = 0; */
 extern char **environ;
 
 char *_getenv(char *name);

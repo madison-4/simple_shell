@@ -6,7 +6,7 @@ char *fullpath(char *command_Idx)
 	char *fullPath, *dupFilePath, *token;
 	size_t len = 0;
 	struct stat statbuf;
-	char *filePath = getenv("PATH");
+	char *filePath = _getenv("PATH");
 
 	if (command_Idx == NULL)
 	{

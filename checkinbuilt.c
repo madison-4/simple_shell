@@ -11,7 +11,7 @@ int checkinbuilt(char **string, char *inputString)
 	}
 	else if (strcmp(string[0], "env") == 0)
 	{
-		/* printenv();*/
+		printenv();
 		/* return (1); */
 	}
 	else

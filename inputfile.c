@@ -1,5 +1,11 @@
 #include "main.h"
 
+/**
+ * main - Entry point of the program
+ *
+ * Return: 0 on success || exit status code
+ */
+
 int main(void)
 {
 	char *print = "($)";
@@ -9,11 +15,6 @@ int main(void)
 	int exit_status = 0;
 	char **commandOutput = NULL;
 
-	inputString = malloc(1024);
-	if (inputString == NULL)
-	{
-		perror("Error assigning memory");
-	}
 	while (1)
 	{
 		if (isatty(STDIN_FILENO) == 1)
@@ -33,18 +34,11 @@ int main(void)
 		}
 		if (*(inputString + j) == '\n')
 			continue;
-		/* tokenize input to create custom Array */
 		commandOutput = splitInput(inputString + j);
-		/* check if command is inbuilt command */
-		/* printf("Command idx 0:%s\n", commandOutput[0]); */
 		if (checkinbuilt(commandOutput, inputString) == 0)/*fix Return Value */
-		{
-			/* execute inbuilt command and return with status */
 			exit_status = 0;
-		}
 		if (executeFile(commandOutput) == EXIT_FAILURE)
 			exit_status = 127;
-		/* else, pass the command to execute function */
 		for (i = 0; commandOutput[i] != NULL; i++)
 			free(commandOutput[i]);
 		free(commandOutput);
@@ -53,6 +47,5 @@ int main(void)
 		free(commandOutput[i]);
 	free(commandOutput);
 	free(inputString);
-	/* printf("Exit Status is : %d\n", exit_status); */
 	return (0);
 }

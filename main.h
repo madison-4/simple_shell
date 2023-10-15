@@ -18,6 +18,7 @@ char **splitInput(char *string);
 int checkinbuilt(char **string, char *inputString);
 char *fullpath(char *command_Idx);
 int executeFile(char **command);
+void printenv(void);
 
 #endif /*MAIN_H*/
 

@@ -1,28 +1,53 @@
 #include "main.h"
-
-
-static char *token;
-char *mystrtok(char *str, const char *delim)
+/**
+ * _strpbrk - find a set of bytes in accept that match the first argument
+ * @s: string to be scanned
+ * @accept: struing with chars to match
+ * Return: pointer to first char in s that ciontains accept
+ */
+char *_strpbrk(char *s, char *accept)
 {
-	char *index = NULL;
+	int iter;
+
+	while (*s)
+	{
+		iter = 0;
+		while (accept[iter])
+		{
+			if (*s == accept[iter])
+				return (s);
+			iter++;
+		}
+		s++;
+	}
+	return (NULL);
+}
+/**
+ * _strtok - split a strin to tokens
+ * @str: string to tokenize
+ * @delim: specify the delimiter
+ * Return: tokens printed
+ */
+char *_strtok(char *str, const char *delim)
+{
+	static char *token;
+	char *start;
 
 	if (str != NULL)
 		token = str;
+	else
+	{
+		if (token == NULL)
+			return NULL;
+	}
 
-	if (token == NULL)
-		return (NULL);
+	start = token;
+	token = strpbrk(start, delim);
 
-	index = token;
-
-	while (*token != *delim && *token != '\0') /*loop through to check for delim */
-		token++;
-
-	if (*token)
+	if (token != NULL)
 	{
 		*token = '\0';
 		token++;
 	}
-	token = NULL;
-
-	return (index);
+	return (start);
 }

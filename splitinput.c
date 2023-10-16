@@ -1,5 +1,9 @@
 #include "main.h"
-
+/**
+ * splitInput - splitsinput to tokens
+ * @string: input string
+ * Return: double pointer to the split tokens
+ */
 char **splitInput(char *string)
 {
 	char **customArray;

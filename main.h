@@ -10,19 +10,14 @@
 #include <sys/stat.h>
 #include <signal.h>
 #include <dirent.h>
+#include<limits.h>
 
 extern char **environ;
 
-char *_getenv(char *name);
-ssize_t _getline(char **lineptr, size_t *n, int fd);
-char **splitInput(char *string);
-int checkinbuilt(char **string, char *inputString);
-char *fullpath(char *command_Idx);
-int executeFile(char **command);
 void printenv(void);
 char *_strpbrk(char *s, char *accept);
 char *_strtok(char *str, const char *delim);
-int _strlen(char *str);
+size_t _strlen(char *str);
 int _strcmp(char *s1, char *s2);
 void interactive(void);
 void non_interact(void);
@@ -32,5 +27,7 @@ int _fputstr(int fd, char *str);
 int _fputint(int fd, int num);
 int _fprintf(int fd, const char *format, char *s1, int n1, char *s2);
 int print_array(char *arr[]);
+void free_array(char **array);
+ssize_t _getline(char *line);
 
 #endif /*MAIN_H*/

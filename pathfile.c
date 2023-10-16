@@ -1,5 +1,9 @@
 #include "main.h"
-
+/**
+ * fullpath - give the path to the command
+ * @command_Idx: index gien to command
+ * Return: command to file
+ */
 char *fullpath(char *command_Idx)
 {
 

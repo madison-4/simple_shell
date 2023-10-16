@@ -1,5 +1,12 @@
 #include "main.h"
 
+/**
+ * splitInput - Splits an input string into array of strings
+ * @string: input string
+ *
+ * Return: array of Strings
+ */
+
 char **splitInput(char *string)
 {
 	char **customArray;

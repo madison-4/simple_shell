@@ -1,5 +1,12 @@
 #include "main.h"
 
+/**
+ * executeFile - a function to execute a command
+ * @command: input commands
+ *
+ * Return: Exit Status
+ */
+
 int executeFile(char **command)
 {
 	char *execPath;
@@ -9,7 +16,7 @@ int executeFile(char **command)
 	execPath = fullpath(command[0]);
 	if (execPath == NULL)
 	{
-		fprintf(stderr, "./hsh: %s: not found\n", command[0]);
+		fprintf(stderr, "./hsh: 1: %s: not found\n", command[0]);
 		return (EXIT_FAILURE);
 	}
 	processID = fork();
@@ -21,11 +28,7 @@ int executeFile(char **command)
 	}
 	else if (processID == 0)
 	{
-		/* printf("Inside child process\n"); */
-		/* printf("exexutable %s\n", execPath); */
-		/* call execve */
 		executeRV = execve(execPath, command, environ);
-			/*calling execve with command array and global environ variable */
 		if (executeRV == -1)
 		{
 			perror("Failed to execute program");
@@ -35,7 +38,6 @@ int executeFile(char **command)
 	}
 	else
 	{
-		/* printf("Inside parent process\n"); */
 		wait(&waitStatus);
 	}
 	free(execPath);

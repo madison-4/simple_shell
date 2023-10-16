@@ -5,6 +5,6 @@ It works in interactive and non-interactive mode
 ## Commands
 It emulates the algorithm and Operations of the thompson shell
 ### Authors
-Eric ogbekene
+Eric Ogbekene
 x
 Samuel Ingosi

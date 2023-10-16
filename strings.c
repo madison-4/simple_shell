@@ -17,3 +17,17 @@ int _strcmp(char *s1, char *s2)
 	difference += (s1[iter] - s2[iter]);
 	return (difference);
 }
+/**
+ * _strdup - copy a string to a new location in mempory
+ * @str: string to be copied
+ * Return: pointer to the new string
+ */
+char *_strdup(char *str)
+{
+	char *new, *old;
+	size_t len = 0;
+
+	if (!(str))
+		return (NULL);
+	oldstr = new;
+	while (

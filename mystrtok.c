@@ -23,7 +23,7 @@ char *_strpbrk(char *s, char *accept)
 	return (NULL);
 }
 /**
- * _strtok - split a strin to tokens
+ * _strtok - split a string to tokens
  * @str: string to tokenize
  * @delim: specify the delimiter
  * Return: tokens printed

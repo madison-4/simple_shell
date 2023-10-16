@@ -1,5 +1,9 @@
 #include "main.h"
 
+/**
+ * printenv - prints environment variable
+ */
+
 void printenv(void)
 {
 	int i = 0;

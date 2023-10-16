@@ -1,5 +1,14 @@
 #include "main.h"
 
+/**
+ * _getline - reads input from a stream
+ * @lineptr: a buffer array to read input into
+ * @n: size of input to read
+ * @fd: file descriptor
+ *
+ * Return: number of bytes Read
+ */
+
 ssize_t _getline(char **lineptr, size_t *n, int fd)
 {
 	/* int idx = 0; */
@@ -23,19 +32,3 @@ ssize_t _getline(char **lineptr, size_t *n, int fd)
 
 	return (readBytes);
 }
-
-/**
-int main(void)
-{
-	size_t n = 0;
-	ssize_t RValue = 0;
-	char *prompt = NULL, *buffer = NULL;
-
-	prompt = "(&)";
-	write(1, prompt, strlen(prompt));
-	RValue = _getline(&buffer, &n, stdin);
-	printf("Return Value is %lu\n", RValue);
-
-	return (0);
-}
-*/

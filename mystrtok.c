@@ -51,3 +51,54 @@ char *_strtok(char *str, const char *delim)
 	}
 	return (start);
 }
+/**
+ * _strlen - get the length of a string
+ * clone strlen
+ * @str: string to find length of
+ * Return: length of string
+ */
+size_t _strlen(char *str)
+{
+	size_t len = 0;
+
+	while (str[len])
+		len++;
+	return (0);
+}
+/**
+ * _strcpy - copy a string
+ * @src: address o source string
+ * @dest: destination address
+ * Return: pointer to new address
+ */
+char *_strcpy(char *dest, char *src)
+{
+	int i;
+
+	for (i = 0; src[i] != '\0'; i++)
+	{
+		dest[i] = src[i];
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+/**
+ * _strcat - concatentaes two strings overwriting the terinating null byte
+ * and adding it to teh end
+ * @dest: string to append to
+ * @src: string to append
+ * Return: dest
+ */
+char *_strcat(char *dest, char *src)
+{
+	int iter = 0, lendest = _strlen(dest);
+
+	while (src[iter] != '\0')
+	{
+		dest[lendest] = src[iter];
+		iter++;
+		lendest++;
+	}
+	dest[lendest + 1] = '\0';
+	return (dest);
+}

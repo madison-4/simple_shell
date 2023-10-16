@@ -1,5 +1,9 @@
 #include "main.h"
-
+/**
+ * executeFile - execute a given command
+ * @command: given path to command
+ * Return: status of success or failure, given the macros
+ */
 int executeFile(char **command)
 {
 	char *execPath;

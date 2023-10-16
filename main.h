@@ -26,5 +26,11 @@ int _strlen(char *str);
 int _strcmp(char *s1, char *s2);
 void interactive(void);
 void non_interact(void);
+char *read_interact(void);
+int _fputchar(int fd, char c);
+int _fputstr(int fd, char *str);
+int _fputint(int fd, int num);
+int _fprintf(int fd, const char *format, char *s1, int n1, char *s2);
+int print_array(char *arr[]);
 
 #endif /*MAIN_H*/

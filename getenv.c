@@ -18,9 +18,9 @@ char *_getenv(char *name)
 		token = strtok(ep[i], "=");
 		while (token)
 		{
-			if (strcmp(token, name) == 0)
+			if (cmpStr(token, name) == 0)
 			{
-				return (ep[i] + strlen(name) + 1);
+				return (ep[i] + strLen(name) + 1);
 			}
 			token = strtok(NULL, "=");
 		}

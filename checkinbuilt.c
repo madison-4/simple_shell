@@ -1,5 +1,10 @@
 #include "main.h"
-
+/**
+ * checkinbuilt - checks for builtin functions
+ * @string: first argument for envieron variables
+ * @inputString: string from user
+ * Return: 1 onfailure
+ */
 int checkinbuilt(char **string, char *inputString)
 {
 	if (strcmp(string[0], "exit") == 0)

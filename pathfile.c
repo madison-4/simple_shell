@@ -9,11 +9,10 @@
 
 char *fullpath(char *command_Idx)
 {
-
 	char *fullPath, *dupFilePath, *token;
 	size_t len = 0;
 	struct stat statbuf;
-	char *filePath = _getenv("PATH");
+	char *filePath = getenv("PATH");
 
 	if (command_Idx == NULL)
 	{
@@ -22,9 +21,9 @@ char *fullpath(char *command_Idx)
 	}
 	if (stat(command_Idx, &statbuf) == 0)
 	{
-		return (strdup(command_Idx));
+		return (_strdup(command_Idx));
 	}
-	dupFilePath = strdup(filePath);
+	dupFilePath = _strdup(filePath);
 	token = strtok(dupFilePath, ":");
 	while (token != NULL)
 	{
@@ -34,13 +33,14 @@ char *fullpath(char *command_Idx)
 			break;
 		else if (fullPath != NULL)
 		{
-			strcpy(fullPath, token);
-			strcat(fullPath, "/");
-			strcat(fullPath, command_Idx);
+			strCopy(fullPath, token);
+			strCat(fullPath, "/");
+			strCat(fullPath, command_Idx);
 			if (stat(fullPath, &statbuf) == 0)
 			{
 				free(dupFilePath);
 				return (fullPath);
+				printf("Full :%s\n", fullPath);
 			}
 		}
 		free(fullPath);

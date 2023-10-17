@@ -27,7 +27,7 @@ int main(void)
 			exit(exit_status);
 		}
 		j = 0;
-		while (inputString[j] != '\0' && j < strlen(inputString) && inputString[j] == ' ')
+		while (inputString[j] != '\0' && j < strLen(inputString) && inputString[j] == ' ')
 		{
 			j++;
 			continue;

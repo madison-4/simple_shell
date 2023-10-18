@@ -1,10 +1,11 @@
 #include "main.h"
 /**
- * _getline - clone getline from Cstdlib
- * @lineptr: line pointer to given buffer
- * @n: size of buffer
- * @fd:  file descriptor of input
- * Return: bytes read on success, -1 on failure
+ * _getline - reads input from a stream
+ * @lineptr: a buffer array to read input into
+ * @n: size of input to read
+ * @fd: file descriptor
+ *
+ * Return: number of bytes Read
  */
 ssize_t _getline(char **lineptr, size_t *n, int fd)
 {
@@ -29,4 +30,3 @@ ssize_t _getline(char **lineptr, size_t *n, int fd)
 
 	return (readBytes);
 }
-

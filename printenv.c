@@ -1,9 +1,11 @@
 #include "main.h"
+
 /**
  * printenv - print the environment variables
  * no aruments
  * Return: nothing
  */
+
 void printenv(void)
 {
 	int i = 0;

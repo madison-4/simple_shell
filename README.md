@@ -1,9 +1,10 @@
 # About
-This project is about recoding the thomson shell in C
+This project is about recoding the thompson shell in C
 ## Modes
 It works in interactive and non-interactive mode
 ## Commands
-It emulate the alforithm for the thompson shell
-### Author
-Eric ogbekene
-samuel
+It emulates the algorithm and Operations of the thompson shell
+### Authors
+Eric Ogbekene
+x
+Samuel Ingosi

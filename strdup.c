@@ -7,26 +7,26 @@
  *
  * Return: pointer to new string
  */
+
 char *_strdup(char *str)
 {
-	int size = 0;
-	char *ptr, *ret;
+	int i, j, len = 0;
+	char *ptr;
 
-	if (!str)
+	if (str == NULL)
 		return (NULL);
 
-	ptr = str;
-	while (*ptr++)
-		size++;
+	for (i = 0; str[i]; i++)
+		len++;
 
-	ret = malloc(size + 1);
-	if (!ret)
+	ptr = malloc(sizeof(char) * (len + 1));
+	if (ptr == NULL)
 		return (NULL);
 
-	ptr = ret;
-	while (*str)
-		*ptr++ = *str++;
+	for (j = 0; j < len; j++)
+		ptr[j] = str[j];
+	ptr[len] = '\0';
 
-	*ptr = 0;
-	return (ret);
+	return (ptr);
 }
+

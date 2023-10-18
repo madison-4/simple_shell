@@ -1,9 +1,12 @@
 #include "main.h"
+
 /**
- * splitInput - splitsinput to tokens
+ * splitInput - Splits an input string into array of strings
  * @string: input string
- * Return: double pointer to the split tokens
+ *
+ * Return: array of Strings
  */
+
 char **splitInput(char *string)
 {
 	char **customArray;
@@ -22,7 +25,7 @@ char **splitInput(char *string)
 	splitToken = strtok(string, delim);
 	while (splitToken != NULL)
 	{
-		customArray[idx] = strdup(splitToken);
+		customArray[idx] = _strdup(splitToken);
 		idx++;
 		splitToken = strtok(NULL, delim);
 	}

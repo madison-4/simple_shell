@@ -30,5 +30,7 @@ char *strCopy(char *dest, char *src);
 /* char *_strcat(char *dest, char *src); */
 char *strCat(char *dest, char *src);
 char *_strdup(char *str);
+int _puts(char *str);
+int _putchar(char c);
 
 #endif /*MAIN_H*/

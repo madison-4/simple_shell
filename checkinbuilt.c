@@ -19,7 +19,8 @@ int checkinbuilt(char **string, char *inputString)
 	}
 	else if (cmpStr(string[0], "env") == 0)
 	{
-		printenv();
+		if (getpid() == 0)
+			printenv();
 		/* return (1); */
 	}
 	else

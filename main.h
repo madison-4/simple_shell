@@ -24,7 +24,7 @@ void printenv(void);
 char *_strpbrk(char *s, char *accept);
 char *_strtok(char *str, const char *delim);
 int cmpStr(char *s01, char *s02);
-/* size_t _strlen(char *str); */
+size_t _strlen(char *str);
 size_t strLen(const char *input);
 char *strCopy(char *dest, char *src);
 /* char *_strcat(char *dest, char *src); */

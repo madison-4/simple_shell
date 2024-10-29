@@ -12,5 +12,8 @@
 #include<signal.h>
 
 int _strlen(char *str);
+char *_strcpy(char *src, char *dest);
+char *_strcat(char *src, char *dest);
+char *_strcmp(char *str1, char *str2);
 
 #endif /* SHELL_H */

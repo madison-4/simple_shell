@@ -5,9 +5,12 @@ This excercise is part of my course at ALX
 
 # Usage
 clone the repo
-compile the program using any posix compliant compiler
+compile the program using any posix compliant compiler.
+
 e.g. using the gcc compiler
+
 `gcc *.c -o shell`
+
 Then run it using the path to the executable `shell`
 
 It runs on Unix systems only.

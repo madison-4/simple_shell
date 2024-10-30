@@ -15,5 +15,6 @@ int _strlen(char *str);
 char *_strcpy(char *src, char *dest);
 char *_strcat(char *src, char *dest);
 char *_strcmp(char *str1, char *str2);
+char *_strchr(char *str, char c);
 
 #endif /* SHELL_H */

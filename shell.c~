@@ -1,0 +1,5 @@
+#include "shell.h"
+/**
+ * This file contains the main function for our simple shell
+ * It invokes bioth interactive and non-interactive modes
+ * main - function to invoke 

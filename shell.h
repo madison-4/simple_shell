@@ -11,6 +11,8 @@
 #include<sys/stat.h>
 #include<signal.h>
 
+extern char **environ;
+
 int _strlen(char *str);
 char *_strcpy(char *src, char *dest);
 char *_strcat(char *src, char *dest);

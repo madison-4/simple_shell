@@ -1,6 +1,7 @@
 #ifndef SHELL_H
 #define SHELL_H
 
+#include<fcntl.h>
 #include<string.h>
 #include<stdio.h>
 #include<string.h>

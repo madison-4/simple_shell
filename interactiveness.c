@@ -26,5 +26,5 @@ void non_interactive(int argc, char **argv, char **envp)
  */
 int prompt(void)
 {
-	return (write(STDOUT_FILENO,"#Cisfun: ",9));
+	return (write(STDOUT_FILENO, "#Cisfun: ", 9));
 }

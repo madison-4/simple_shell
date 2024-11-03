@@ -20,5 +20,10 @@ char *_strcmp(char *str1, char *str2);
 char *_strchr(char *str, char c);
 unsigned int _strspn(char *str, char *accept);
 char *_strpbrk(char *str, char *acc);
+char *_strtok(char *str, char *delim);
+void interactive_mode(int argc, char **av, char **ev);
+void non_interactive(int ac, char **av, char **ev);
+int prompt(void);
+int _fprintf(int fd, char *str);
 
 #endif /* SHELL_H */

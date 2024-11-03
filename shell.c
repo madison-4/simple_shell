@@ -1,7 +1,5 @@
 #include "shell.h"
 /**
- * This file contains the main function for our simple shell
- * It invokes bioth interactive and non-interactive modes
  * main - function to invoke the shell
  * @argc: argument count
  * @argv: arguments passed to main
@@ -10,5 +8,9 @@
  */
 int main(int argc, char **argv, char **envp)
 {
+	if (isatty(STDIN_FILENO))
+		interactive_mode(argc, argv, envp);
+	else
+		non_interactive(argc, argv, anvp);
 	return (0);
 }

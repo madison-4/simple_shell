@@ -8,6 +8,26 @@
  */
 void interactive_mode(int argc, char **argv, char **envp)
 {
+	char *comm = NULL, *toks[1024];
+	size_t commsize, args = 0;
+
+	while (1)
+	{
+		args = 0;
+		prompt();
+		if (getline(&comm, &commsize, stdin) == -1)
+			perror("Could not read line");
+		toks[args] = _strtok(comm, " \t");
+		++args;
+		while (toks[args] != NULL)
+			toks[args] = _strtok(NULL, " \t");
+		if (access(toks[0], F_OK | R_OK | W_OK | X_OK) == 0)
+		{
+			if (fork() == 0)
+			{
+				if (execve(toks[0], toks, envp) == -1)
+					perror
+	}
 }
 /**
  * non_interactive - function to call non interactive mode

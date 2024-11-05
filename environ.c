@@ -21,7 +21,7 @@ char *_getenv(char *name)
 			}
 		}
 		if (status)
-			return (environ[i][j + 1]);
+			return (&environ[i][j + 1]);
 	}
 	return (NULL);
 }

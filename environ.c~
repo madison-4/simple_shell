@@ -1,0 +1,16 @@
+#include "shell.h"
+/**
+ * _getenv - a function to get the value of an environment variable
+ * It copies the functionalioty of the defauklt getenv function
+ * @name: name of the environment variable
+ * Return: value of the environment variable
+ */
+char *_getenv(char *name)
+{
+	int i, j;
+	char *name;
+
+
+	for (i = 0; environ[i]; i++)
+	{
+		

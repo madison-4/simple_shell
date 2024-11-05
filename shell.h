@@ -26,5 +26,6 @@ void interactive_mode(int argc, char **av, char **ev);
 void non_interactive(int ac, char **av, char **ev);
 int prompt(void);
 int _fprintf(int fd, char *str);
+char *_getenv(char *name);
 
 #endif /* SHELL_H */

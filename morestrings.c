@@ -14,16 +14,16 @@ char *_strtok(char *s, char *del)
 		s = olds;
 	/* Scan leading delimiters and escape them */
 	s += _strspn(s, del);
-	/* if s is now null the string is ponly delimiters */
+	/* if s is now null the string is only delimiters */
 	if (*s == '\0')
 	{
 		olds = s;
 		return (NULL);
 	}
 	token = s;
-	s = strpbrk(token, del);
+	s = _strpbrk(token, del);
 	if (s == NULL)
-		olds = strchr(token, '\0');
+		olds = _strchr(token, '\0');
 	else
 	{
 		*s = '\0';

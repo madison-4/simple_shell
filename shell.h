@@ -17,7 +17,7 @@ extern char **environ;
 int _strlen(char *str);
 char *_strcpy(char *src, char *dest);
 char *_strcat(char *src, char *dest);
-char *_strcmp(char *str1, char *str2);
+int _strcmp(char *str1, char *str2);
 char *_strchr(char *str, char c);
 unsigned int _strspn(char *str, char *accept);
 char *_strpbrk(char *str, char *acc);
@@ -28,5 +28,7 @@ int prompt(void);
 int _fprintf(int fd, char *str);
 char *_getenv(char *name);
 char *_strdup(char *st);
+
+typedef struct stat tree;
 
 #endif /* SHELL_H */

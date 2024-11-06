@@ -9,24 +9,46 @@
 void interactive_mode(int argc, char **argv, char **envp)
 {
 	char *comm = NULL, *toks[1024];
-	size_t commsize, args = 0;
+	size_t commsize, args = 0, commands = 0;
+	int status;
+	pid_t child;
 
+	(void) argc;
+	(void) argv;
 	while (1)
 	{
 		args = 0;
 		prompt();
 		if (getline(&comm, &commsize, stdin) == -1)
 			perror("Could not read line");
-		toks[args] = _strtok(comm, " \t");
+		toks[args] = _strtok(comm, " \t\n");
 		++args;
 		while (toks[args] != NULL)
-			toks[args] = _strtok(NULL, " \t");
-		if (access(toks[0], F_OK | R_OK | W_OK | X_OK) == 0)
+			toks[args] = _strtok(NULL, " \n\t");
+		if ((access(toks[0], F_OK)) == 0)
 		{
-			if (fork() == 0)
+			child = fork();
+			if (child  == 0)
 			{
+				printf("The next line is execve with the command enetered\n");
 				if (execve(toks[0], toks, envp) == -1)
-					perror
+				{
+					_fprintf(STDOUT_FILENO, "Could not execute command");
+					commands++;
+				}
+			}
+			else
+			{
+				wait(&status);
+				commands++;
+			}
+		}
+		else
+		{
+			_fprintf(STDERR_FILENO, "The tokenized string is:");
+			_fprintf(STDERR_FILENO, toks[0]);
+			_fprintf(STDERR_FILENO, ";klsdnvjsnjvk");
+		}
 	}
 }
 /**
@@ -38,6 +60,9 @@ void interactive_mode(int argc, char **argv, char **envp)
  */
 void non_interactive(int argc, char **argv, char **envp)
 {
+	(void) argc;
+	(void) argv;
+	(void) envp;
 }
 /**
  * prompt - a function that prints a prompt

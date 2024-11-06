@@ -11,6 +11,6 @@ int main(int argc, char **argv, char **envp)
 	if (isatty(STDIN_FILENO))
 		interactive_mode(argc, argv, envp);
 	else
-		non_interactive(argc, argv, anvp);
+		non_interactive(argc, argv, envp);
 	return (0);
 }

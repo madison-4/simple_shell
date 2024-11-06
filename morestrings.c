@@ -32,28 +32,6 @@ char *_strtok(char *s, char *del)
 	return (token);
 }
 /**
- * _strchr - function to locate a character in a string
- * @str: string to locate char in
- * @c: character to be located
- * Return: first occurence of char or NULL if it isn't there
- */
-char *_strchr(char *str, char c)
-{
-	int iter = 0;
-
-	if (!str)
-		return (NULL);
-	while (str[iter])
-	{
-		if (str[iter] == c)
-			return (s + iter);
-		iter++;
-	}
-	if (c == 0)
-		return (s + iter);
-	return (NULL);
-}
-/**
  * _strspn - find the nunber of matching characters from the beginning
  * @s: stribng to find
  * @accept: from where to find the match
@@ -69,7 +47,6 @@ unsigned int _strspn(char *s, char *accept)
 		len++;
 	return (len);
 }
-#include "main.h"
 /**
  * _strpbrk - find a set of bytes in accept that match the first argument
  * @s: string to be scanned

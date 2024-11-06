@@ -28,6 +28,7 @@ int prompt(void);
 int _fprintf(int fd, char *str);
 char *_getenv(char *name);
 char *_strdup(char *st);
+char **retcomm(char *);
 
 typedef struct stat tree;
 

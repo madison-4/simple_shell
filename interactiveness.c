@@ -38,12 +38,10 @@ void interactive_mode(int argc, char **argv, char **envp)
 				_fprintf(STDERR_FILENO, toks[0]);
 				perror("Could not execute");
 			}
-			else
-			{
-				wait(&status);
-				free(comm);
-			}
 		}
+		wait(&status);
+		free(comm);
+		free(toks);
 	}
 }
 /**
@@ -86,7 +84,7 @@ char **retcomm(char *str)
 	toks[args] = _strtok(str, " \t\n");
 	if (toks[args] == NULL)
 		return (NULL);
-	for (args = 0; toks[args]; args++)
+	for (args = 1; toks[args]; args++)
 		toks[args] = _strtok(NULL, " \t\n");
 	if (access(toks[0], X_OK) == 0)
 		return (toks);

@@ -102,7 +102,7 @@ char **retcomm(char *str)
 			return (NULL);
 		newpath = _strcpy(newpath, pat[i]);
 		newpath = _strcat(newpath, "/");
-		newpath = _strcat(newpath, toks[0]);
+		newpath = strcat(newpath, toks[0]);
 		if (access(newpath, X_OK) == 0)
 		{
 			free(path);
@@ -110,7 +110,8 @@ char **retcomm(char *str)
 			return (toks);
 		}
 		i++;
-		pat[i] = _strtok(path, ":");
+		pat[i] = _strtok(NULL, ":");
+		free(newpath);
 	}
 	free(newpath);
 	free(path);

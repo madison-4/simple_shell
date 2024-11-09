@@ -8,7 +8,7 @@
  */
 void interactive_mode(int argc, char **argv, char **envp)
 {
-	char *comm = NULL, *toks[1024];
+	char *comm = NULL, **toks;
 	size_t commsize, args = 0, commands = 0;
 	int status;
 	pid_t child;
@@ -21,34 +21,7 @@ void interactive_mode(int argc, char **argv, char **envp)
 		prompt();
 		if (getline(&comm, &commsize, stdin) == -1)
 			perror("Could not read line");
-		toks[args] = _strtok(comm, " \t\n");
-		++args;
-		while (toks[args] != NULL)
-			toks[args] = _strtok(NULL, " \n\t");
-		if ((access(toks[0], F_OK)) == 0)
-		{
-			child = fork();
-			if (child  == 0)
-			{
-				printf("The next line is execve with the command enetered\n");
-				if (execve(toks[0], toks, envp) == -1)
-				{
-					_fprintf(STDOUT_FILENO, "Could not execute command");
-					commands++;
-				}
-			}
-			else
-			{
-				wait(&status);
-				commands++;
-			}
-		}
-		else
-		{
-			_fprintf(STDERR_FILENO, "The tokenized string is:");
-			_fprintf(STDERR_FILENO, toks[0]);
-			_fprintf(STDERR_FILENO, ";klsdnvjsnjvk");
-		}
+		toks = retcomm(comm);
 	}
 }
 /**
@@ -72,4 +45,53 @@ void non_interactive(int argc, char **argv, char **envp)
 int prompt(void)
 {
 	return (write(STDOUT_FILENO, "#Cisfun: ", 9));
+}
+/**
+ * retcomm - function to split a string into arrays
+ * The string is the text entered by the user
+ * It splits it and returns an arrays of commands and their args
+ * @str: string entered by user
+ * Return: array of chars to be used or NULL on failure
+ */
+char **retcomm(char *str)
+{
+	char **toks, *path, *pat[1024], *newpath;
+	size_t args = 0, i = 0;
+
+	toks = malloc(2048 * sizeof(char *));
+	if (toks == NULL)
+		return (NULL);
+	toks[0] = _strtok(str, " \t\n");
+	if (toks[0] == NULL)
+		return (NULL);
+	for (args = 0; toks[args]; args++)
+		toks[args] = _strtok(NULL, " \t\n");
+	if (access(toks[0], X_OK) == 0)
+		return (toks);
+	path = _getenv("PATH");
+	path = _strdup(path);
+	if (path == NULL)
+		return (NULL);
+	pat[i] = _strtok(path, ":");
+	while (pat[i])
+	{
+		newpath = malloc((_strlen(pat[i]) + _strlen(toks[0]) + 2) * sizeof(char));
+		if (newpath == NULL)
+			return (NULL);
+		newpath = _strcpy(newpath, pat[i]);
+		newpath = _strcat(newpath, "/");
+		newpath = _strcat(newpath, toks[0]);
+		if (access(newpath, X_OK) == 0)
+		{
+			free(path);
+			toks[0] = newpath;
+			return (toks);
+		}
+		i++;
+		pat[i] = _strtok(path, ":");
+	}
+	free(newpath);
+	free(path);
+	free(toks);
+	return (NULL);
 }

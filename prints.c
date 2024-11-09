@@ -18,3 +18,35 @@ int _fprintf(int fd, char *sent)
 	}
 	return (sentence);
 }
+/**
+ * numprint - a function that prints a number using recursion
+ * @arg: the number to be printed
+ * Return: number of digits printed
+ */
+int numprint(int arg)
+{
+	unsigned int k = arg;
+	int count = 0;
+
+	if (arg < 0)
+	{
+		_putchar('-');
+		count++;
+		arg *= -1;
+		k = arg;
+	}
+	k /= 10;
+	if (k)
+		count += numprint(k);
+	count += _putchar(((unsigned int) arg % 10) + 48);
+	return (count);
+}
+/**
+ * _putchar - print a char to stdout
+ * @c: char to write
+ * Return: 1 on success, -1 on error and errno is approproately set
+ */
+int _putchar(char c)
+{
+	return (write(1, &c, 1));
+}

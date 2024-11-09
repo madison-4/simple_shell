@@ -29,6 +29,9 @@ int _fprintf(int fd, char *str);
 char *_getenv(char *name);
 char *_strdup(char *st);
 char **retcomm(char *);
+int numprint(int arg);
+int numprint(int arg);
+int _putchar(char c);
 
 typedef struct stat tree;
 

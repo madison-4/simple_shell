@@ -9,19 +9,41 @@
 void interactive_mode(int argc, char **argv, char **envp)
 {
 	char *comm = NULL, **toks;
-	size_t commsize, args = 0, commands = 0;
+	size_t commsize, commands = 0;
 	int status;
 	pid_t child;
 
 	(void) argc;
-	(void) argv;
 	while (1)
 	{
-		args = 0;
 		prompt();
 		if (getline(&comm, &commsize, stdin) == -1)
 			perror("Could not read line");
+		commands++;
 		toks = retcomm(comm);
+		if (toks == NULL)
+		{
+			_fprintf(STDERR_FILENO, argv[0]);
+			_fprintf(STDERR_FILENO, ": ");
+			_fprintf(STDERR_FILENO, comm);
+			_fprintf(STDERR_FILENO, ": ");
+			_fprintf(STDERR_FILENO, "not found");
+			continue;
+		}
+		child = fork();
+		if (child == 0)
+		{
+			if ((execve(toks[0], toks, envp)) == -1)
+			{
+				_fprintf(STDERR_FILENO, toks[0]);
+				perror("Could not execute");
+			}
+			else
+			{
+				wait(&status);
+				free(comm);
+			}
+		}
 	}
 }
 /**
@@ -61,8 +83,8 @@ char **retcomm(char *str)
 	toks = malloc(2048 * sizeof(char *));
 	if (toks == NULL)
 		return (NULL);
-	toks[0] = _strtok(str, " \t\n");
-	if (toks[0] == NULL)
+	toks[args] = _strtok(str, " \t\n");
+	if (toks[args] == NULL)
 		return (NULL);
 	for (args = 0; toks[args]; args++)
 		toks[args] = _strtok(NULL, " \t\n");

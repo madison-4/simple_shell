@@ -23,11 +23,7 @@ void interactive_mode(int argc, char **argv, char **envp)
 		toks = retcomm(comm);
 		if (toks == NULL)
 		{
-			_fprintf(STDERR_FILENO, argv[0]);
-			_fprintf(STDERR_FILENO, ": ");
-			_fprintf(STDERR_FILENO, comm);
-			_fprintf(STDERR_FILENO, ": ");
-			_fprintf(STDERR_FILENO, "not found");
+			errprint(commands, argv[0]);
 			continue;
 		}
 		child = fork();
@@ -40,7 +36,6 @@ void interactive_mode(int argc, char **argv, char **envp)
 			}
 		}
 		wait(&status);
-		free(comm);
 		free(toks);
 	}
 }
@@ -81,11 +76,11 @@ char **retcomm(char *str)
 	toks = malloc(2048 * sizeof(char *));
 	if (toks == NULL)
 		return (NULL);
-	toks[args] = _strtok(str, " \t\n");
-	if (toks[args] == NULL)
+	*toks = _strtok(str, " \t\n");
+	if (*toks == NULL)
 		return (NULL);
-	for (args = 1; toks[args]; args++)
-		toks[args] = _strtok(NULL, " \t\n");
+	for (args = 1; *(toks + args); args++)
+		*(toks + args) = _strtok(NULL, " \t\n");
 	if (access(toks[0], X_OK) == 0)
 		return (toks);
 	path = _getenv("PATH");
@@ -111,7 +106,6 @@ char **retcomm(char *str)
 		pat[i] = _strtok(NULL, ":");
 		free(newpath);
 	}
-	free(newpath);
 	free(path);
 	free(toks);
 	return (NULL);

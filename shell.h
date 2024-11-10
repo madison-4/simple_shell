@@ -30,8 +30,8 @@ char *_getenv(char *name);
 char *_strdup(char *st);
 char **retcomm(char *);
 int numprint(int arg);
-int numprint(int arg);
 int _putchar(char c);
+int errprint(int com, char *st);
 
 typedef struct stat tree;
 

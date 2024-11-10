@@ -50,3 +50,20 @@ int _putchar(char c)
 {
 	return (write(1, &c, 1));
 }
+/**
+ * errprint - print ungotten command
+ * @com: number of command
+ * @str: given command
+ * Return: number of chars print
+ */
+int errprint(int com, char *str)
+{
+	int i = 0;
+
+	i += _fprintf(STDOUT_FILENO, str);
+	i += _fprintf(STDOUT_FILENO, ": ");
+	i += numprint(com);
+	i += _fprintf(STDOUT_FILENO, ": not found");
+
+	return (i);
+}

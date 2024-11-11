@@ -31,7 +31,8 @@ char *_strdup(char *st);
 char **retcomm(char *);
 int numprint(int arg);
 int _putchar(char c);
-int errprint(int com, char *st);
+int errprint(int com, char *st, char *s);
+char **cmdpatapnd(char **dre);
 
 typedef struct stat tree;
 

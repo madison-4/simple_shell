@@ -11,7 +11,6 @@ void interactive_mode(int argc, char **argv, char **envp)
 	char *comm = NULL, **toks;
 	size_t commsize, commands = 0;
 	int status;
-	pid_t child;
 
 	(void) argc;
 	while (1)
@@ -23,7 +22,7 @@ void interactive_mode(int argc, char **argv, char **envp)
 		toks = retcomm(comm);
 		if (toks == NULL)
 		{
-			errprint(commands, argv[0]);
+			errprint(commands, argv[0], comm);
 			free(comm);
 			continue;
 		}
@@ -35,6 +34,7 @@ void interactive_mode(int argc, char **argv, char **envp)
 			}
 		}
 		wait(&status);
+		free(toks[0]);
 		free(toks);
 	}
 }
@@ -64,15 +64,17 @@ int prompt(void)
  * retcomm - function to split a string into arrays
  * The string is the text entered by the user
  * It splits it and returns an arrays of commands and their args
- * If the command is the full path itself it returns that, else it checks if 
- * it could append the strihg the path before executing
+ * If the command is the full path itself it returns that, else it checks if
+ * by appending it to the path it can be execuited then dpoes that and returns
+ * the appended string
+ * it could append the string the path before executing
  * @str: string entered by user
  * Return: array of chars to be used or NULL on failure
  */
 char **retcomm(char *str)
 {
-	char **toks, *path, *pat[1024], *newpath;
-	size_t args = 0, i = 0;
+	char **toks;
+	size_t args = 0;
 
 	toks = malloc(2048 * sizeof(char *));
 	if (toks == NULL)
@@ -84,30 +86,38 @@ char **retcomm(char *str)
 		*(toks + args) = _strtok(NULL, " \t\n");
 	if (access(toks[0], X_OK) == 0)
 		return (toks);
+	return (cmdpatapnd(toks));
+}
+/**
+ * cmdpatapnd - a function that appends the first char p[ointer to the path
+ * It then checks if it's an executable and returns it if it is
+ * If it isn't it returns NULL
+ * @str: pointyer to char
+ * Return: appended path or NULL
+ */
+char **cmdpatapnd(char **str)
+{
+	char *path, *toks, *newpath;
+
 	path = _getenv("PATH");
 	path = _strdup(path);
 	if (path == NULL)
 		return (NULL);
-	pat[i] = _strtok(path, ":");
-	while (pat[i])
+	toks = _strtok(path, ":");
+	while (toks)
 	{
-		newpath = malloc((_strlen(pat[i]) + _strlen(toks[0]) + 2) * sizeof(char));
-		if (newpath == NULL)
-			return (NULL);
-		newpath = _strcpy(newpath, pat[i]);
+		newpath = malloc((_strlen(toks) + _strlen(str[0]) + 2) * sizeof(char));
+		newpath = _strcpy(newpath, toks);
 		newpath = _strcat(newpath, "/");
-		newpath = strcat(newpath, toks[0]);
+		newpath = _strcat(newpath, str[0]);
 		if (access(newpath, X_OK) == 0)
 		{
+			str[0] = newpath;
 			free(path);
-			toks[0] = newpath;
-			return (toks);
+			return (str);
 		}
-		i++;
-		pat[i] = _strtok(NULL, ":");
+		toks = _strtok(NULL, ":");
 		free(newpath);
 	}
-	free(path);
-	free(toks);
 	return (NULL);
 }

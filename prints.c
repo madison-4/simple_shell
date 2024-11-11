@@ -53,17 +53,20 @@ int _putchar(char c)
 /**
  * errprint - print ungotten command
  * @com: number of command
- * @str: given command
+ * @str: program name
+ * @cmd: given failed command
  * Return: number of chars print
  */
-int errprint(int com, char *str)
+int errprint(int com, char *str, char *cmd)
 {
 	int i = 0;
 
 	i += _fprintf(STDOUT_FILENO, str);
 	i += _fprintf(STDOUT_FILENO, ": ");
 	i += numprint(com);
-	i += _fprintf(STDOUT_FILENO, ": not found");
+	i += _fprintf(STDOUT_FILENO, " ");
+	i += _fprintf(STDOUT_FILENO, cmd);
+	i += _fprintf(STDOUT_FILENO, ": not found\n");
 
 	return (i);
 }

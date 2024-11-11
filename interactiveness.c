@@ -18,20 +18,19 @@ void interactive_mode(int argc, char **argv, char **envp)
 	{
 		prompt();
 		if (getline(&comm, &commsize, stdin) == -1)
-			perror("Could not read line");
+			break;
 		commands++;
 		toks = retcomm(comm);
 		if (toks == NULL)
 		{
 			errprint(commands, argv[0]);
+			free(comm);
 			continue;
 		}
-		child = fork();
-		if (child == 0)
+		if (fork() == 0)
 		{
 			if ((execve(toks[0], toks, envp)) == -1)
 			{
-				_fprintf(STDERR_FILENO, toks[0]);
 				perror("Could not execute");
 			}
 		}
@@ -65,6 +64,8 @@ int prompt(void)
  * retcomm - function to split a string into arrays
  * The string is the text entered by the user
  * It splits it and returns an arrays of commands and their args
+ * If the command is the full path itself it returns that, else it checks if 
+ * it could append the strihg the path before executing
  * @str: string entered by user
  * Return: array of chars to be used or NULL on failure
  */

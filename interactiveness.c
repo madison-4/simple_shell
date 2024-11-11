@@ -47,9 +47,34 @@ void interactive_mode(int argc, char **argv, char **envp)
  */
 void non_interactive(int argc, char **argv, char **envp)
 {
+	char *cmd = NULL, **toks;
+	size_t n = 0, numcommands = 0;
+	int status;
+
 	(void) argc;
-	(void) argv;
-	(void) envp;
+	if (getline(&cmd, &n, stdin) == -1)
+		exit(EXIT_SUCCESS);
+	numcommands++;
+	toks = retcomm(cmd);
+	if (toks == NULL)
+	{
+		errprint(numcommands, argv[0], cmd);
+		free(cmd);
+		exit(EXIT_SUCCESS);
+	}
+	if (fork() == 0)
+	{
+		if (execve(toks[0], toks, envp) == -1)
+		{
+			errprint(numcommands, argv[0], cmd);
+			exit(EXIT_FAILURE);
+		}
+	}
+	else
+	{
+		wait(&status);
+		free(cmd);
+	}
 }
 /**
  * prompt - a function that prints a prompt
